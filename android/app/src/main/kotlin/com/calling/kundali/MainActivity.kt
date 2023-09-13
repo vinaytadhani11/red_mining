@@ -1,4 +1,4 @@
-package com.example.redbtc_mining_app
+package com.calling.kundali
 
 import io.flutter.embedding.android.FlutterActivity
 
