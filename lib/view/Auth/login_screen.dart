@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:redbtc_mining_app/controllers/auth_controller.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -18,18 +19,13 @@ class Login_Screen extends StatefulWidget {
 
 class _Login_ScreenState extends State<Login_Screen> {
   // show the password or not
-  bool _isObscure = true;
-  static final _key = GlobalKey<FormState>();
-  TextEditingController _textEditConEmail = TextEditingController();
-  TextEditingController _textEditConPassword = TextEditingController();
-  bool isPressed = true;
+
+  final con = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
-    Offset distance = isPressed ? Offset(2, 2) : Offset(5, 5);
-    double blur = isPressed ? 4.0 : 8.0;
     return Mainbackground(
       child: Form(
-        key: _key,
+        key: con.logInFormKey,
         child: SafeArea(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -43,10 +39,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                       ),
                   child: const Text(
                     'Welcome Back!',
-                    style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
                 25.boxH(),
@@ -73,10 +66,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                           ),
                           child: const Text(
                             'Login to Your Account',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
                           ),
                         ),
                         Container(
@@ -91,22 +81,22 @@ class _Login_ScreenState extends State<Login_Screen> {
                               // Spacer(),
                               Text(
                                 'Log In',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                               22.boxH(),
                               TextFormField(
-                                controller: _textEditConEmail,
+                                controller: con.emailTC,
                                 onChanged: (value) {
                                   print(value);
                                 },
+                                validator: (value) {
+                                  if (value?.isEmpty ?? false) {
+                                    return 'Please enter your email';
+                                  }
+                                  return null;
+                                },
                                 cursorColor: Color(0xffC1120E),
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
                                 decoration: InputDecoration(
                                   hintText: "Email Id",
                                   prefixIcon: Padding(
@@ -118,14 +108,10 @@ class _Login_ScreenState extends State<Login_Screen> {
                                       width: 18,
                                     ),
                                   ),
-                                  hintStyle: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
+                                  hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
                                   enabledBorder: UnderlineInputBorder(
                                     //<-- SEE HERE
-                                    borderSide: BorderSide(
-                                        color: Color(0xffC1120E), width: 1.5),
+                                    borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                     //<-- SEE HERE
@@ -134,79 +120,76 @@ class _Login_ScreenState extends State<Login_Screen> {
                                 ),
                               ),
                               14.boxH(),
-                              TextFormField(
-                                obscureText: _isObscure, //show/hide password
-                                controller: _textEditConPassword,
-                                onChanged: (value) {
-                                  print(value);
-                                },
-                                cursorColor: Color(0xffC1120E),
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                                decoration: InputDecoration(
-                                  hintText: "Password",
-                                  hintStyle: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xffC1120E),
+                              Obx(
+                                () => TextFormField(
+                                  obscureText: con.isObscure.value, //show/hide password
+                                  controller: con.passTC,
+                                  onChanged: (value) {
+                                    print(value);
+                                  },
+                                  validator: (value) {
+                                    if (value?.isEmpty ?? true) {
+                                      return 'Please enter password';
+                                    }
+                                    return null;
+                                  },
+                                  cursorColor: Color(0xffC1120E),
+                                  style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                  decoration: InputDecoration(
+                                    hintText: "Password",
+                                    hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xffC1120E),
+                                      ),
+                                    ),
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Image.asset(
+                                        'assets/images/password.webp',
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 18,
+                                      ),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      //<-- SEE HERE
+                                      borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      //<-- SEE HERE
+                                      borderSide: BorderSide(color: Colors.white),
+                                    ),
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.all(11),
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            con.isObscure.value = !con.isObscure.value;
+                                          },
+                                          child: con.isObscure.value
+                                              ? Image.asset(
+                                                  'assets/images/show_eye.webp',
+                                                  fit: BoxFit.contain,
+                                                  height: 22,
+                                                  width: 18,
+                                                )
+                                              : Image.asset(
+                                                  'assets/images/close_eye.webp',
+                                                  fit: BoxFit.contain,
+                                                  height: 22,
+                                                  width: 18,
+                                                )),
                                     ),
                                   ),
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.asset(
-                                      'assets/images/password.webp',
-                                      fit: BoxFit.contain,
-                                      height: 22,
-                                      width: 18,
-                                    ),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    //<-- SEE HERE
-                                    borderSide: BorderSide(
-                                        color: Color(0xffC1120E), width: 1.5),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    //<-- SEE HERE
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.all(11),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          setState(
-                                            () {
-                                              _isObscure = !_isObscure;
-                                            },
-                                          );
-                                        },
-                                        child: _isObscure
-                                            ? Image.asset(
-                                                'assets/images/show_eye.webp',
-                                                fit: BoxFit.contain,
-                                                height: 22,
-                                                width: 18,
-                                              )
-                                            : Image.asset(
-                                                'assets/images/close_eye.webp',
-                                                fit: BoxFit.contain,
-                                                height: 22,
-                                                width: 18,
-                                              )),
-                                  ),
+                                  // IconButton(
+                                  //   icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
+                                  //   onPressed: () {
+                                  //     setState(() {
+                                  //       _isObscure = !_isObscure;
+                                  //     },);
+                                  //   },),
+                                  // ),
                                 ),
-                                // IconButton(
-                                //   icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
-                                //   onPressed: () {
-                                //     setState(() {
-                                //       _isObscure = !_isObscure;
-                                //     },);
-                                //   },),
-                                // ),
                               ),
                               14.boxH(),
                               Row(
@@ -214,16 +197,13 @@ class _Login_ScreenState extends State<Login_Screen> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.to(() => Forget_Password(),transition: Transition.rightToLeftWithFade);
+                                      Get.to(() => Forget_Password(), transition: Transition.rightToLeftWithFade);
                                     },
                                     child: Container(
                                       margin: EdgeInsets.fromLTRB(18, 0, 18, 0),
                                       child: Text(
                                         'Forget Password?',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -231,9 +211,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                               ),
                               14.boxH(),
                               InkWell(
-                                onTap: () {
-                                  Get.offAll(() =>HomePage(),transition: Transition.topLevel);
-                                },
+                                onTap: con.signInWithEmailPassword,
                                 child: Container(
                                   height: 50,
                                   alignment: Alignment.center,
@@ -241,7 +219,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                     // color: Colors.white,
                                     color: Color(0xffC1120E),
                                     borderRadius: BorderRadius.circular(100),
-                                   boxShadow: [
+                                    boxShadow: [
                                       const BoxShadow(
                                         offset: Offset(-10, -10),
                                         blurRadius: 3,
@@ -252,7 +230,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                       BoxShadow(
                                         offset: Offset(6, 6),
                                         blurRadius: 4,
-                                        spreadRadius:1,
+                                        spreadRadius: 1,
                                         color: Colors.black.withOpacity(0.3),
                                         inset: true,
                                       ),
@@ -260,16 +238,12 @@ class _Login_ScreenState extends State<Login_Screen> {
                                   ),
                                   child: Text(
                                     'LOGIN',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16, 18, 16, 14),
+                                padding: const EdgeInsets.fromLTRB(16, 18, 16, 14),
                                 child: Row(
                                   children: [
                                     Expanded(
@@ -277,18 +251,13 @@ class _Login_ScreenState extends State<Login_Screen> {
                                       height: 1,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                          gradient: RadialGradient(
-                                              radius: 80,
-                                              colors: [
-                                            const Color(0xff8AC7FF)
-                                                .withOpacity(.4),
-                                            const Color(0xff8AC7FF)
-                                                .withOpacity(0),
-                                          ])),
+                                          gradient: RadialGradient(radius: 80, colors: [
+                                        const Color(0xff8AC7FF).withOpacity(.4),
+                                        const Color(0xff8AC7FF).withOpacity(0),
+                                      ])),
                                     )),
                                     const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
+                                      padding: EdgeInsets.symmetric(horizontal: 16),
                                       child: Text(
                                         "OR",
                                         style: TextStyle(
@@ -302,14 +271,10 @@ class _Login_ScreenState extends State<Login_Screen> {
                                       height: 1,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                          gradient: RadialGradient(
-                                              radius: 80,
-                                              colors: [
-                                            const Color(0xff8AC7FF)
-                                                .withOpacity(.4),
-                                            const Color(0xff8AC7FF)
-                                                .withOpacity(0),
-                                          ])),
+                                          gradient: RadialGradient(radius: 80, colors: [
+                                        const Color(0xff8AC7FF).withOpacity(.4),
+                                        const Color(0xff8AC7FF).withOpacity(0),
+                                      ])),
                                     )),
                                   ],
                                 ),
@@ -317,22 +282,27 @@ class _Login_ScreenState extends State<Login_Screen> {
                               Container(
                                 child: Text(
                                   'Sign In With',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                                 ),
                               ),
                               14.boxH(),
-                              Container(
-                                height: 54,
-                                width: 54,
-                                padding: EdgeInsets.all(13),
-                                decoration: BoxDecoration(
-                                  color: Color(0xffC1120E),
-                                  shape: BoxShape.circle,
+                              InkWell(
+                                onTap: () {
+                                  con.signInWithGoogle();
+                                },
+                                child: Container(
+                                  height: 54,
+                                  width: 54,
+                                  padding: EdgeInsets.all(13),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffC1120E),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.asset(
+                                    Images.gpay_login,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                                child: Image.asset(Images.gpay_login,fit: BoxFit.contain,),
                               ),
                               14.boxH(),
                               Row(
@@ -341,15 +311,12 @@ class _Login_ScreenState extends State<Login_Screen> {
                                 children: [
                                   Text(
                                     "You don't an account?",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
                                   ),
                                   InkWell(
-                                    onTap: (){
-                                        Get.offAll(() =>Register_screen(),transition: Transition.rightToLeftWithFade);
-                                      },
+                                    onTap: () {
+                                      Get.offAll(() => Register_screen(), transition: Transition.rightToLeftWithFade);
+                                    },
                                     child: Text(
                                       " Register",
                                       style: TextStyle(
