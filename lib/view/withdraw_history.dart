@@ -1,46 +1,94 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:get/get.dart';
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
-import 'package:redbtc_mining_app/controllers/leaderboard_controller.dart';
+import 'package:redbtc_mining_app/controllers/mining_history_controller.dart';
+import 'package:redbtc_mining_app/controllers/withdraw_controller.dart';
+import 'package:redbtc_mining_app/extensions/size_extensions.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
-import 'package:redbtc_mining_app/extensions/size_extensions.dart';
-import '../../Widget/background.dart';
-import '../../Widget/common_simple_screen.dart';
+import '../Constants/images.dart';
+import '../Widget/background.dart';
 
-class LeaderboardScreen extends StatefulWidget {
-  const LeaderboardScreen({super.key});
-
+class WithdrawHistory extends StatefulWidget {
+  const WithdrawHistory({super.key});
   @override
-  State<LeaderboardScreen> createState() => _LeaderboardScreenState();
+  State<WithdrawHistory> createState() => _WithdrawHistoryState();
 }
 
-class _LeaderboardScreenState extends State<LeaderboardScreen> {
-  final con = Get.put(LeaderboardController());
+class _WithdrawHistoryState extends State<WithdrawHistory> {
+  final con = Get.put(WithdrawController());
 
   @override
   void initState() {
-    con.getLeaderboard();
+    con.withdrawHistoryAPI();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Mainbackground(
-      child: CommonMainScreen(
-        isRightIcon: false,
-        title: 'Leaderboard',
-        child: SafeArea(
-          child: Obx(
-            () => ConmanLoader(
-              loadingState: con.isLoading.value,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Container(
+              height: 35,
+              width: 35,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                // color: Colors.white10,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: const Icon(
+                Icons.arrow_back_rounded,
+                size: 28,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            'History ',
+            style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          actions: [
+            InkWell(
+              onTap: () {
+                // Get.to(History_Screen(), transition: Transition.upToDown);
+              },
+              child: Container(
+                height: 28,
+                width: 28,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  // color: Colors.white10,
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Image.asset(
+                  Images.delete,
+                  fit: BoxFit.contain,
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+            ),
+            18.boxW(),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        body: Obx(
+          () => ConmanLoader(
+            loadingState: con.loaderList.value,
+            child: SafeArea(
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                itemCount: con.userData.length,
+                itemCount: 10,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  final data = con.userData[index];
                   return InkWell(
                     onTap: () {
                       // Get.to(Plan_View_Screen(),transition: Transition.fadeIn);
@@ -74,9 +122,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             top: 0,
                             right: 0,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+                              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                               decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                 color: const Color(0xffC1120E),
                                 boxShadow: [
                                   const BoxShadow(
@@ -95,35 +143,38 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                   ),
                                 ],
                               ),
-                              child: Text(
-                                data.subscription.toString(),
-                                style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    '567.5832',
+                                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                  const Text(
+                                    'Point Per Hr',
+                                    style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '$index',
-                                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                                    const Text(
+                                      'BTC Mining',
+                                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                                     ),
-                                    10.boxW(),
-                                    Text(
-                                      '${data.firstName ?? ""} ${data.lastName ?? ""}',
-                                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-                                    ),
-                                    10.boxW(),
-                                    Text(
-                                      '(${data.country ?? ""})',
-                                      style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+                                    10.boxH(),
+                                    const Text(
+                                      '15/12/2022',
+                                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                                     ),
                                   ],
                                 ),

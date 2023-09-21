@@ -2,9 +2,11 @@ class ApiConstants {
   /// dev
   static const String DEV_BASE_URL = "http://157.230.176.42/mining-app/api";
   static const String PROD_BASE_URL = "http://157.230.176.42/mining-app/api";
+  static const String NODE_DEV_BASE_URL = "http://157.230.176.42:8080/api";
 
   /// prod
   static const String BASE_URL = DEV_BASE_URL;
+  static const String NODE_URL = NODE_DEV_BASE_URL;
   static const int APP_ID = 7;
 
   /// Auth
@@ -24,4 +26,12 @@ class ApiConstants {
   static const String createQuery = "$BASE_URL/create_query";
   static const String userQuery = "$BASE_URL/user_query";
   static const String queryMessage = "$BASE_URL/query_message";
+
+  //Node Api
+
+  static const String getMining = "$NODE_URL/mining/get-mining-history";
+  static const String referralsHistory = "$NODE_URL/user/get-referrals-history";
+  static const String addPlan = "$NODE_URL/plan/add";
+  static const String withdrawPoint = "$NODE_URL/user/withdraw-point";
+  static const String withdrawHistory = "$NODE_URL/user/get-withdraw-history";
 }

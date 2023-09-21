@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               InkWell(
                 onTap: () {
-                  Get.to(History_Screen(),transition: Transition.upToDown);
+                  Get.to(History_Screen(), transition: Transition.upToDown);
                 },
                 child: Container(
                   height: 30,
@@ -77,10 +78,7 @@ class _HomePageState extends State<HomePage> {
             ],
             title: Text(
               'BTC Mining',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700),
+              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
             ),
           ),
           backgroundColor: Colors.transparent,
@@ -107,38 +105,26 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Your Current Point',
-                              style: TextStyle(
-                                  color: Color(0xffC1120E), fontSize: 15),
+                              style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
                             ),
                             Text(
                               '1234.00045614',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
+                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),
-                        VerticalDivider(
-                            color: Colors.white,
-                            endIndent: 8,
-                            indent: 8,
-                            thickness: 1.5),
+                        VerticalDivider(color: Colors.white, endIndent: 8, indent: 8, thickness: 1.5),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               'Point Per Hr',
-                              style: TextStyle(
-                                  color: Color(0xffC1120E), fontSize: 15),
+                              style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
                             ),
                             Text(
                               '+ 9.00',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
+                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),
@@ -175,14 +161,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Your Current Plan',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(() =>UpgradePlanScreen(),transition: Transition.downToUp);
+                            Get.to(() => UpgradePlanScreen(), transition: Transition.downToUp);
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -201,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                                 BoxShadow(
                                   offset: Offset(6, 6),
                                   blurRadius: 4,
-                                  spreadRadius:1,
+                                  spreadRadius: 1,
                                   color: Colors.black.withOpacity(0.3),
                                   inset: true,
                                 ),
@@ -213,10 +196,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'Upgrade',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
+                                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                                 ),
                                 5.boxW(),
                                 Image.asset(
@@ -245,17 +225,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Active Mining',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           '57,000',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
