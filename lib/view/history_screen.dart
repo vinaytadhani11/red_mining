@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
 import 'package:redbtc_mining_app/controllers/mining_history_controller.dart';
 import 'package:redbtc_mining_app/extensions/size_extensions.dart';
@@ -53,29 +54,29 @@ class _History_ScreenState extends State<History_Screen> {
             'History ',
             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
           ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Get.to(History_Screen(), transition: Transition.upToDown);
-              },
-              child: Container(
-                height: 28,
-                width: 28,
-                padding: EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  // color: Colors.white10,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                child: Image.asset(
-                  Images.delete,
-                  fit: BoxFit.contain,
-                  height: 30,
-                  width: 30,
-                ),
-              ),
-            ),
-            18.boxW(),
-          ],
+          // actions: [
+          //   InkWell(
+          //     onTap: () {
+          //       Get.to(History_Screen(), transition: Transition.upToDown);
+          //     },
+          //     child: Container(
+          //       height: 28,
+          //       width: 28,
+          //       padding: EdgeInsets.all(2),
+          //       decoration: BoxDecoration(
+          //         // color: Colors.white10,
+          //         borderRadius: BorderRadius.circular(40),
+          //       ),
+          //       child: Image.asset(
+          //         Images.delete,
+          //         fit: BoxFit.contain,
+          //         height: 30,
+          //         width: 30,
+          //       ),
+          //     ),
+          //   ),
+          //   18.boxW(),
+          // ],
         ),
         backgroundColor: Colors.transparent,
         body: Obx(
@@ -84,10 +85,11 @@ class _History_ScreenState extends State<History_Screen> {
             child: SafeArea(
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                itemCount: 10,
+                itemCount: con.miniList.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
+                  final data = con.miniList[index];
                   return InkWell(
                     onTap: () {
                       // Get.to(Plan_View_Screen(),transition: Transition.fadeIn);
@@ -121,9 +123,9 @@ class _History_ScreenState extends State<History_Screen> {
                             top: 0,
                             right: 0,
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                 color: const Color(0xffC1120E),
                                 boxShadow: [
                                   const BoxShadow(
@@ -144,8 +146,8 @@ class _History_ScreenState extends State<History_Screen> {
                               ),
                               child: Column(
                                 children: [
-                                  const Text(
-                                    '567.5832',
+                                  Text(
+                                    data.mining == "null" ? "0.0" : data.mining ?? "",
                                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   const Text(
@@ -171,8 +173,8 @@ class _History_ScreenState extends State<History_Screen> {
                                       style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                                     ),
                                     10.boxH(),
-                                    const Text(
-                                      '15/12/2022',
+                                    Text(
+                                      DateFormat('yyyy/MM/dd').format(DateTime.parse(data.date ?? "")).toString(),
                                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                                     ),
                                   ],

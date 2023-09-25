@@ -1,6 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
+import 'package:redbtc_mining_app/controllers/home_controller.dart';
+import 'package:redbtc_mining_app/models/sokect_model.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -19,6 +24,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final con = Get.put(HomeController());
+
+  @override
+  void initState() {
+    con.sokectIO();
+    super.initState();
+  }
+
   static final _key = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldd = GlobalKey();
   bool isPressed = true;
@@ -83,7 +96,16 @@ class _HomePageState extends State<HomePage> {
           ),
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child: SingleChildScrollView(
+            child:
+                //  StreamBuilder(
+                //   stream: con.streamSocket.getResponse,
+                //   builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                //     return Container(
+                //       child: Text(snapshot.data ?? ""),
+                //     );
+                //   },
+                // ),
+                SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -96,49 +118,121 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: Color(0xffC1120E), width: 1.0),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Your Current Point',
-                              style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
-                            ),
-                            Text(
-                              '1234.00045614',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                        VerticalDivider(color: Colors.white, endIndent: 8, indent: 8, thickness: 1.5),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Point Per Hr',
-                              style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
-                            ),
-                            Text(
-                              '+ 9.00',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                      ],
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Your Current Point',
+                                style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
+                              ),
+                              Text(
+                                con.socketIoModel.value?.mining ?? "0.0000000",
+                                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+                              ),
+                            ],
+                          ),
+                          VerticalDivider(color: Colors.white, endIndent: 8, indent: 8, thickness: 1.5),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Point Per Hr',
+                                style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
+                              ),
+                              Text(
+                                con.socketIoModel.value?.currentSpeed ?? "0.0000",
+                                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   10.boxH(),
-                  Container(
-                    height: 170,
-                    width: 170,
-                    // color: Colors.white,
-                    child: Image.asset(
-                      Images.start,
-                      fit: BoxFit.contain,
+                  // InkWell(
+                  //   onTap: () {
+                  //     con.sendMessage();
+                  //   },
+                  //   child: Container(
+                  //     height: 170,
+                  //     width: 170,
+                  //     // color: Colors.white,
+                  //     child: Image.asset(
+                  //       Images.start,
+                  //       fit: BoxFit.contain,
+                  //     ),
+                  //   ),
+                  // ),
+                  Obx(
+                    () => InkWell(
+                      onTap: () {
+                        // con.sendMessage();
+                        con.isMiningStart.value == false
+                            ? con.socket?.on('mine', (newMessage) {
+                                log(jsonEncode(newMessage));
+                                con.socketIoModel.value = SocketIoModel.fromJson(newMessage);
+                                con.isMiningStart.value = con.socketIoModel.value?.isMiningStart ?? false;
+                              })
+                            : con.socket?.dispose();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 5,
+                            color: Color(0xffC1120E),
+                          ),
+                        ),
+                        child: Container(
+                          clipBehavior: Clip.hardEdge,
+                          height: 135,
+                          width: 135,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                                child: Image.asset(
+                                  Images.bitcoin,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              Positioned(
+                                left: 0,
+                                bottom: -110,
+                                right: 0,
+                                child: Container(
+                                  alignment: Alignment.topCenter,
+                                  height: 170,
+                                  padding: EdgeInsets.only(top: con.isMiningStart.value == false ? 27 : 27),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                      color: Color(0xffC1120E),
+                                    ),
+                                    color: Colors.black,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    con.isMiningStart.value == false ? "Start" : con.socketIoModel.value?.timeString ?? "Start",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: con.isMiningStart.value == false ? 17 : 15, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   10.boxH(),

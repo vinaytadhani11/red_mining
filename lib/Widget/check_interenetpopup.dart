@@ -72,7 +72,8 @@ class _CheckInterNetPopupState extends State<CheckInterNetPopup> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     if (result == ConnectivityResult.none) {
-      Get.dialog(CheckInterNetPopup(onTap: () {
+      Get.dialog(barrierColor: Colors.grey.shade800.withOpacity(.3), CheckInterNetPopup(onTap: () {
         Get.back();
         initConnectivity();
       }), barrierDismissible: false);

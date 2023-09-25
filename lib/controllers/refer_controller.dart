@@ -22,6 +22,7 @@ class ReferController extends GetxController {
         "user_key": AppSharedPreference.getUserKey.toString(),
       });
       isLoading.value = false;
+      log(response.body);
       if (response.statusCode == 200) {
         userInfoModel.value = UserInfoModel.fromJson(jsonDecode(response.body));
         log(response.body);
@@ -33,7 +34,6 @@ class ReferController extends GetxController {
         }
       } else {
         AppFunction.showSnackBar(title: "Error", message: response.reasonPhrase);
-
         log(response.statusCode.toString());
       }
     } catch (error) {

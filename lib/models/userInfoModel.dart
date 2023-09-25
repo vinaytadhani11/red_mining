@@ -36,7 +36,7 @@ class Data {
   int? planId;
   String? planName;
   int? hasRateSpeed;
-  int? miningPoint;
+  dynamic? miningPoint;
   String? totalEarning;
   String? totalWithdrawl;
 
