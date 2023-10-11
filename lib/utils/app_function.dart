@@ -14,13 +14,32 @@ class AppFunction {
       snackPosition: snackPosition ?? SnackPosition.TOP,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       borderRadius: 8,
-      backgroundColor: title.toLowerCase().contains('success') ? Colors.green : Colors.red,
+      titleText: Text(
+        title,
+        style: TextStyle(
+          color: title.toLowerCase().contains('success') ? Colors.green : Colors.red,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+      messageText: Text(
+        message,
+        style: TextStyle(
+          color: title.toLowerCase().contains('success') ? Colors.green : Colors.red,
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ),
+      ),
+      backgroundColor: Colors.black,
+      // backgroundColor: title.toLowerCase().contains('success') ? Colors.green : Colors.red,
       // : title.toLowerCase().contains('error')
       //     ? Colors.red
       //     : Colors.black45,
       animationDuration: const Duration(milliseconds: 500),
       barBlur: 10,
-      colorText: Colors.white,
+
+      // colorText: title.toLowerCase().contains('success') ? Colors.green : Colors.red,
+      // colorText: Colors.white,
       isDismissible: false,
     );
   }

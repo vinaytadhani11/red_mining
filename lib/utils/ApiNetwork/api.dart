@@ -25,14 +25,15 @@ class Api {
   Future<dynamic> post(
     String url, {
     Map<String, dynamic>? queryData,
-    Map<String, String>? header,
     dynamic bodyData,
   }) async {
+    // headers["Content-Type"] = "application/x-www-form-urlencoded";
+
     log('bodyData: ${jsonEncode(bodyData)}');
     final response = await dio.post(
       getUrl(url, queryParameters: queryData),
       body: bodyData,
-      headers: header ?? headers(),
+      headers: headers(),
     );
     return response;
   }
@@ -165,7 +166,9 @@ Map<String, String> headers() {
   final Map<String, String> headers = <String, String>{};
   // headers["Content-Type"] = "application/x-www-form-urlencoded";
   headers["Accept"] = "application/json";
-  final String token = AppSharedPreference.getToken;
+  headers["token"] = ApiConstants.TOKEN;
+  const String token = ApiConstants.TOKEN;
+  // final String token = AppSharedPreference.getToken;
   log('Authorization Token : $token');
   if (token != '') {
     headers["Authorization"] = token;

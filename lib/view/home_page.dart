@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
 import 'package:redbtc_mining_app/controllers/home_controller.dart';
 import 'package:redbtc_mining_app/models/sokect_model.dart';
+import 'package:redbtc_mining_app/utils/app_function.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         key: _key,
         child: Scaffold(
           key: scaffoldd,
-          drawer: Drawerpage(),
+          drawer: Drawbridge(),
           appBar: AppBar(
             centerTitle: true,
             leading: InkWell(
@@ -171,65 +172,68 @@ class _HomePageState extends State<HomePage> {
                   //   ),
                   // ),
                   Obx(
-                    () => InkWell(
-                      onTap: () {
-                        // con.sendMessage();
-                        con.isMiningStart.value == false
-                            ? con.socket?.on('mine', (newMessage) {
-                                log(jsonEncode(newMessage));
-                                con.socketIoModel.value = SocketIoModel.fromJson(newMessage);
-                                con.isMiningStart.value = con.socketIoModel.value?.isMiningStart ?? false;
-                              })
-                            : con.socket?.dispose();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 5,
-                            color: Color(0xffC1120E),
-                          ),
-                        ),
+                    () => AnimatedScale(
+                      scale: con.isBig.value ? 1.1 : 1.0,
+                      duration: const Duration(milliseconds: 50),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                        onTap: () {
+                          con.isConnecting.value == true ? con.startingMining() : null;
+                        },
                         child: Container(
-                          clipBehavior: Clip.hardEdge,
-                          height: 135,
-                          width: 135,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 5,
+                              color: Color(0xffC1120E),
+                            ),
                           ),
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-                                child: Image.asset(
-                                  Images.bitcoin,
-                                  fit: BoxFit.contain,
+                          child: Container(
+                            clipBehavior: Clip.hardEdge,
+                            height: 135,
+                            width: 135,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                                  child: Image.asset(
+                                    Images.bitcoin,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                left: 0,
-                                bottom: -110,
-                                right: 0,
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  height: 170,
-                                  padding: EdgeInsets.only(top: con.isMiningStart.value == false ? 27 : 27),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: 2,
-                                      color: Color(0xffC1120E),
+                                Positioned(
+                                  left: 0,
+                                  bottom: -110,
+                                  right: 0,
+                                  child: Container(
+                                    alignment: Alignment.topCenter,
+                                    height: 170,
+                                    padding: EdgeInsets.only(top: con.isMiningStart.value == false ? 27 : 27),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Color(0xffC1120E),
+                                      ),
+                                      color: Colors.black,
+                                      shape: BoxShape.circle,
                                     ),
-                                    color: Colors.black,
-                                    shape: BoxShape.circle,
+                                    child: Text(
+                                      con.isMiningStart.value == false
+                                          ? "Start"
+                                          : con.isConnecting.value == false
+                                              ? "Connecting"
+                                              : con.socketIoModel.value?.timeString ?? "Start",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: con.isMiningStart.value == false ? 17 : 15, fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                  child: Text(
-                                    con.isMiningStart.value == false ? "Start" : con.socketIoModel.value?.timeString ?? "Start",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: con.isMiningStart.value == false ? 17 : 15, fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

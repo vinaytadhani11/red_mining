@@ -11,7 +11,6 @@ import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
 import 'package:redbtc_mining_app/firebase_options.dart';
 import 'package:redbtc_mining_app/splash_screen/splash_screen.dart';
 import 'package:redbtc_mining_app/utils/app_shared_preference.dart';
-import 'view/Auth/login_screen.dart';
 
 Future<void> initService() async {
   AppSharedPreference.init();

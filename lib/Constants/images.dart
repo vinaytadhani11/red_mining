@@ -19,6 +19,8 @@ class Images {
   static const message_1 = "${iconspath}images/massage_1.webp";
   static const plan = "${iconspath}images/plan.webp";
   static const privacy_policy_1 = "${iconspath}images/privacy_policy_1.webp";
+  static const changePass = "${iconspath}images/ic_vector.png";
+  static const passPrivacy = "${iconspath}images/password.png";
   static const profile_1 = "${iconspath}images/profile_1.webp";
   static const refer_earn = "${iconspath}images/refer_earn.webp";
   static const settings_1 = "${iconspath}images/settings_1.webp";
@@ -29,6 +31,7 @@ class Images {
   static const user = "${iconspath}images/user.webp";
   static const withdraw = "${iconspath}images/withdraw.webp";
   static const right_arrow = "${iconspath}images/right_arrow.webp";
+  static const union = "${iconspath}images/Union.png";
 }
 
 // Global -----------------------

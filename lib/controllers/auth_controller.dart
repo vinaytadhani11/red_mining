@@ -16,9 +16,15 @@ class AuthController extends GetxController {
   final emailTC = TextEditingController();
   final passTC = TextEditingController();
   final isObscure = true.obs;
-  final logInFormKey = GlobalKey<FormState>();
+
   Api api = Api();
   final isLoading = false.obs;
+
+  bool forIsObscure = true;
+  final key = GlobalKey<FormState>();
+  TextEditingController textEditConEmail = TextEditingController();
+  TextEditingController textEditConPassword = TextEditingController();
+  bool isPressed = true;
 
   Future<UserCredential> signInWithGoogleFirebase() async {
     // Trigger the authentication flow
@@ -37,54 +43,56 @@ class AuthController extends GetxController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  signInWithGoogle() async {
+  // signInWithGoogle() async {
+  //   try {
+  //     isLoading.value = true;
+  //     FirebaseAuth.instance.currentUser;
+  //     final firebaseUser = await signInWithGoogleFirebase();
+  //     print(firebaseUser.user?.displayName ?? "");
+  //     print(firebaseUser.user?.email ?? "");
+  //     print(firebaseUser.user?.uid ?? "");
+  //     loginApiCalling("2");
+  //   } catch (e) {
+  //     isLoading.value = false;
+  //     print(e);
+  //   }
+  // }
+
+  // signInWithEmailPassword() async {
+  //   if (logInFormKey.currentState?.validate() ?? false) {
+  //     // FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTC.text, password: passTC.text).then((value) {
+  //     //   print(value.user?.displayName ?? "");
+  //     //   print(value.user?.email ?? "");
+  //     //   print(value.user?.uid ?? "");
+  //     //   loginApiCalling(1);
+  //     //   // Get.to(() => Forget_Password(), transition: Transition.rightToLeftWithFade);
+  //     //   //   Get.offAll(() => HomePage(), transition: Transition.topLevel);
+  //     // }).catchError((e) {
+  //     //   print(e);
+  //     // });
+  //     try {
+  //       isLoading.value = true;
+  //       FirebaseAuth.instance.currentUser;
+  //       final firebaseUser = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTC.text, password: passTC.text);
+  //       print(firebaseUser.user?.displayName ?? "");
+  //       print(firebaseUser.user?.email ?? "");
+  //       print(firebaseUser.user?.uid ?? "");
+  //       loginApiCalling("1");
+  //     } catch (e) {
+  //       isLoading.value = false;
+  //       print(e);
+  //     }
+  //   }
+  // }
+
+  loginApiCalling() async {
     try {
       isLoading.value = true;
-      FirebaseAuth.instance.currentUser;
-      final firebaseUser = await signInWithGoogleFirebase();
-      print(firebaseUser.user?.displayName ?? "");
-      print(firebaseUser.user?.email ?? "");
-      print(firebaseUser.user?.uid ?? "");
-      loginApiCalling("2");
-    } catch (e) {
-      isLoading.value = false;
-      print(e);
-    }
-  }
-
-  signInWithEmailPassword() async {
-    if (logInFormKey.currentState?.validate() ?? false) {
-      // FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTC.text, password: passTC.text).then((value) {
-      //   print(value.user?.displayName ?? "");
-      //   print(value.user?.email ?? "");
-      //   print(value.user?.uid ?? "");
-      //   loginApiCalling(1);
-      //   // Get.to(() => Forget_Password(), transition: Transition.rightToLeftWithFade);
-      //   //   Get.offAll(() => HomePage(), transition: Transition.topLevel);
-      // }).catchError((e) {
-      //   print(e);
-      // });
-      try {
-        isLoading.value = true;
-        FirebaseAuth.instance.currentUser;
-        final firebaseUser = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTC.text, password: passTC.text);
-        print(firebaseUser.user?.displayName ?? "");
-        print(firebaseUser.user?.email ?? "");
-        print(firebaseUser.user?.uid ?? "");
-        loginApiCalling("1");
-      } catch (e) {
-        isLoading.value = false;
-        print(e);
-      }
-    }
-  }
-
-  loginApiCalling(String loginWith) async {
-    try {
-      final response = await api.post(ApiConstants.login, bodyData: {
-        "login_with": loginWith,
+      final response = await api.post(ApiConstants.loginNEW, bodyData: {
+        // "login_with": loginWith,
         "email": emailTC.text,
         "app_id": ApiConstants.APP_ID.toString(),
+        "password": passTC.text,
       });
       isLoading.value = false;
       if (response.statusCode == 200) {

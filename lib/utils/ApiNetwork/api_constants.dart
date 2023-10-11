@@ -3,6 +3,7 @@ class ApiConstants {
   static const String DEV_BASE_URL = "http://157.230.176.42/mining-app/api";
   static const String PROD_BASE_URL = "http://157.230.176.42/mining-app/api";
   static const String NODE_DEV_BASE_URL = "http://157.230.176.42:8080/api";
+  static const String TOKEN = "OwXpYZCIFZSXN3bnr1mUJeToDTDl8sfSXX6Ozjj1SKtBO0pg79LolCXhW7l7";
 
   /// prod
   static const String BASE_URL = DEV_BASE_URL;
@@ -34,4 +35,8 @@ class ApiConstants {
   static const String addPlan = "$NODE_URL/plan/add";
   static const String withdrawPoint = "$NODE_URL/user/withdraw-point";
   static const String withdrawHistory = "$NODE_URL/user/get-withdraw-history";
+
+  // new API
+  static const String loginNEW = "$BASE_URL/login_v2";
+  static const String categoryNEW = "$BASE_URL/user_query_v2";
 }

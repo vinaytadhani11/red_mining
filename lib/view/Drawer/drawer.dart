@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redbtc_mining_app/controllers/home_controller.dart';
 import 'package:redbtc_mining_app/extensions/size_extensions.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../Constants/images.dart';
@@ -10,14 +11,16 @@ import '../setting/setting_screen.dart';
 import '../upgradeplanscreen.dart';
 import '../withdraw_screen.dart';
 
-class Drawerpage extends StatefulWidget {
-  const Drawerpage({Key? key}) : super(key: key);
+class Drawbridge extends StatefulWidget {
+  const Drawbridge({Key? key}) : super(key: key);
 
   @override
-  State<Drawerpage> createState() => _DrawerpageState();
+  State<Drawbridge> createState() => _DrawbridgeState();
 }
 
-class _DrawerpageState extends State<Drawerpage> {
+class _DrawbridgeState extends State<Drawbridge> {
+  final con = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,9 +29,7 @@ class _DrawerpageState extends State<Drawerpage> {
         shadowColor: Color(0xffC1120E),
         surfaceTintColor: Colors.black,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(50),
-                topRight: Radius.circular(50)),
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), topRight: Radius.circular(50)),
             side: BorderSide(
               color: Color(0xffC1120E),
             )),
@@ -84,23 +85,22 @@ class _DrawerpageState extends State<Drawerpage> {
             8.boxH(),
             CustomListTile(Images.plan, 'Upgrade Speed', () {
               Get.back();
-              Get.to(UpgradePlanScreen(),transition: Transition.leftToRightWithFade);
+              Get.to(UpgradePlanScreen(), transition: Transition.leftToRightWithFade);
             }),
             8.boxH(),
             CustomListTile(Images.withdraw, 'Withdraw Shiba ', () {
               Get.back();
-              Get.to(Withdraw_Screen(),
-                  transition: Transition.leftToRightWithFade);
+              Get.to(Withdraw_Screen(), transition: Transition.leftToRightWithFade);
             }),
             8.boxH(),
             CustomListTile(Images.user, 'Your Profile', () {
               Get.back();
-              Get.to(Profile_Screen(),transition: Transition.leftToRightWithFade);
+              Get.to(Profile_Screen(), transition: Transition.leftToRightWithFade);
             }),
             8.boxH(),
             CustomListTile(Images.settings_1, 'Settings', () {
               Get.back();
-              Get.to(Setting_Screen(),transition: Transition.leftToRightWithFade);
+              Get.to(Setting_Screen(), transition: Transition.leftToRightWithFade);
             }),
             8.boxH(),
             CustomListTile(Images.share, 'Share App', () {
@@ -108,7 +108,7 @@ class _DrawerpageState extends State<Drawerpage> {
             }),
             8.boxH(),
             CustomListTile(Images.logout, 'Logout', () {
-              Get.offAll(Login_Screen(),transition: Transition.zoom);
+              con.signOut();
             }),
           ],
         ),

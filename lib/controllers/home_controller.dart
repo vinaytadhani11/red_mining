@@ -1,18 +1,21 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:redbtc_mining_app/models/sokect_model.dart';
 import 'package:redbtc_mining_app/utils/ApiNetwork/api_constants.dart';
 import 'package:redbtc_mining_app/utils/app_shared_preference.dart';
+import 'package:redbtc_mining_app/view/Auth/login_screen.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 import 'dart:async';
 
 class HomeController extends GetxController {
-  StreamSocket streamSocket = StreamSocket();
   IO.Socket? socket;
   RxBool isMiningStart = false.obs;
+  RxBool isBig = false.obs;
+  RxBool isConnecting = false.obs;
   final socketIoModel = Rx<SocketIoModel?>(null);
 
   sokectIO() {
@@ -23,6 +26,7 @@ class HomeController extends GetxController {
     socket?.connect();
     socket?.onConnect((_) {
       socket?.emit('connectUser', [AppSharedPreference.getUserKey, ApiConstants.APP_ID.toString()]);
+      isConnecting.value = true;
       print('Connection established');
     });
 
@@ -37,16 +41,28 @@ class HomeController extends GetxController {
   sendMessage() {
     socket?.emit('startMining', [AppSharedPreference.getUserKey, ApiConstants.APP_ID.toString()]);
   }
-}
 
-class StreamSocket {
-  final _socketResponse = StreamController<String>();
+  startingMining() {
+    isBig.value = true;
+    isMiningStart.value == false
+        ? socket?.on('mine', (newMessage) {
+            log(jsonEncode(newMessage));
+            socketIoModel.value = SocketIoModel.fromJson(newMessage);
+            isMiningStart.value = socketIoModel.value?.isMiningStart ?? false;
+          })
+        : disposeMining();
+    Future.delayed(const Duration(milliseconds: 50), () {
+      isBig.value = false;
+    });
+  }
 
-  void Function(String) get addResponse => _socketResponse.sink.add;
+  disposeMining() {
+    isMiningStart.value = false;
+    socket?.clearListeners();
+  }
 
-  Stream<String> get getResponse => _socketResponse.stream;
-
-  void dispose() {
-    _socketResponse.close();
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAll(const Login_Screen(), transition: Transition.zoom);
   }
 }
