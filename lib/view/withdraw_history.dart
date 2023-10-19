@@ -54,29 +54,6 @@ class _WithdrawHistoryState extends State<WithdrawHistory> {
             'History ',
             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
           ),
-          actions: [
-            InkWell(
-              onTap: () {
-                // Get.to(History_Screen(), transition: Transition.upToDown);
-              },
-              child: Container(
-                height: 28,
-                width: 28,
-                padding: EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  // color: Colors.white10,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                child: Image.asset(
-                  Images.delete,
-                  fit: BoxFit.contain,
-                  height: 30,
-                  width: 30,
-                ),
-              ),
-            ),
-            18.boxW(),
-          ],
         ),
         backgroundColor: Colors.transparent,
         body: Obx(

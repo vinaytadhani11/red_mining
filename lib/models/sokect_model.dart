@@ -84,13 +84,13 @@ class Data {
 }
 
 class TodayM {
-  int? t;
+  String? t;
   String? miningPoints;
 
   TodayM({this.t, this.miningPoints});
 
   TodayM.fromJson(Map<String, dynamic> json) {
-    t = json['t'];
+    t = json['t'].toString();
     miningPoints = json['miningPoints'];
   }
 
@@ -109,7 +109,7 @@ class TtM {
   TtM({this.tt, this.miningPoints});
 
   TtM.fromJson(Map<String, dynamic> json) {
-    tt = json['tt'];
+    tt = json['tt'].toString();
     miningPoints = json['miningPoints'];
   }
 

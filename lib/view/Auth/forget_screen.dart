@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
 import 'package:redbtc_mining_app/controllers/auth_controller.dart';
+import 'package:redbtc_mining_app/utils/app_function.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -129,7 +130,13 @@ class _Forget_PasswordState extends State<Forget_Password> {
                                   ),
                                   22.boxH(),
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      if (con.textEditConEmail.text == "") {
+                                        AppFunction.showSnackBar(title: "Error", message: "Enter your email address");
+                                      } else {
+                                        con.forgotPassword();
+                                      }
+                                    },
                                     child: Container(
                                       height: 50,
                                       alignment: Alignment.center,

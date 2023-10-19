@@ -9,6 +9,7 @@ import 'package:redbtc_mining_app/utils/ApiNetwork/api.dart';
 import 'package:redbtc_mining_app/utils/ApiNetwork/api_constants.dart';
 import 'package:redbtc_mining_app/utils/app_function.dart';
 import 'package:redbtc_mining_app/utils/app_shared_preference.dart';
+import 'package:redbtc_mining_app/view/Auth/login_screen.dart';
 import 'package:redbtc_mining_app/view/home_page.dart';
 
 class RegController extends GetxController {
@@ -73,7 +74,8 @@ class RegController extends GetxController {
           AppSharedPreference.setUid(jsonBody["data"]["UID"]);
           AppSharedPreference.setUserKey(jsonBody["data"]["user_key"]);
           AppSharedPreference.setString(SP.referral, jsonBody["data"]["referral_code"]);
-          Get.offAll(() => HomePage(), transition: Transition.topLevel);
+          AppSharedPreference.setEmail(jsonBody["data"]["email"]);
+          Get.offAll(() => const Login_Screen(), transition: Transition.topLevel);
           fNameTC.clear();
           emailTC.clear();
           passTC.clear();
@@ -85,7 +87,6 @@ class RegController extends GetxController {
         }
       } else {
         AppFunction.showSnackBar(title: "Error", message: response.reasonPhrase);
-
         log(response.statusCode.toString());
       }
     } catch (error) {

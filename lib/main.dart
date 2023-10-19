@@ -16,6 +16,8 @@ Future<void> initService() async {
   AppSharedPreference.init();
 }
 
+RxString currentPoint = "".obs;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initService();

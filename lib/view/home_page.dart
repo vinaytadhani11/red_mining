@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
+
 import 'package:redbtc_mining_app/controllers/home_controller.dart';
-import 'package:redbtc_mining_app/models/sokect_model.dart';
-import 'package:redbtc_mining_app/utils/app_function.dart';
+
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
 import 'package:get/get.dart';
@@ -222,13 +221,13 @@ class _HomePageState extends State<HomePage> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Text(
-                                      con.isMiningStart.value == false
-                                          ? "Start"
-                                          : con.isConnecting.value == false
-                                              ? "Connecting"
-                                              : con.socketIoModel.value?.timeString ?? "Start",
+                                      con.isConnecting.value == false
+                                          ? "Connecting"
+                                          : con.isMiningStart.value == false
+                                              ? "Start"
+                                              : con.socketIoModel.value?.timeString ?? "Connecting",
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: con.isMiningStart.value == false ? 17 : 15, fontWeight: FontWeight.w600),
+                                          color: Colors.white, fontSize: con.isMiningStart.value == false ? 15 : 15, fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 )

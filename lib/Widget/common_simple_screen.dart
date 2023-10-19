@@ -9,12 +9,7 @@ class CommonMainScreen extends StatelessWidget {
   final String? rightIcon;
   bool isRightIcon = false;
   void Function()? rightonTap;
-  CommonMainScreen(
-      {super.key,
-      this.child,
-      this.title,
-      this.rightIcon,this.rightonTap,
-      required this.isRightIcon});
+  CommonMainScreen({super.key, this.child, this.title, this.rightIcon, this.rightonTap, required this.isRightIcon});
   @override
   Widget build(BuildContext context) {
     return Mainbackground(
@@ -43,8 +38,7 @@ class CommonMainScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: Text(
             title ?? "",
-            style: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+            style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
           ),
           actions: [
             isRightIcon == true

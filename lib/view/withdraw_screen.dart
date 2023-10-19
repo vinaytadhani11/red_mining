@@ -3,6 +3,7 @@ import 'package:redbtc_mining_app/Widget/check_interenetpopup.dart';
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
 import 'package:redbtc_mining_app/Widget/withdrawSucessPopup.dart';
 import 'package:redbtc_mining_app/controllers/withdraw_controller.dart';
+import 'package:redbtc_mining_app/main.dart';
 import 'package:redbtc_mining_app/view/withdraw_history.dart';
 import '../../inset_shodow/box_decoration.dart';
 import '../../inset_shodow/box_shadow.dart';
@@ -91,8 +92,8 @@ class _Withdraw_ScreenState extends State<Withdraw_Screen> {
                                     ),
                                   ],
                                 ),
-                                child: const Text(
-                                  '1245.008910',
+                                child: Text(
+                                  currentPoint.value,
                                   style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
                                 ),
                               ),

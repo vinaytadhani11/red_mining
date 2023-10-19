@@ -38,5 +38,12 @@ class ApiConstants {
 
   // new API
   static const String loginNEW = "$BASE_URL/login_v2";
+  static const String forgotPassword = "$BASE_URL/forgot_password";
   static const String categoryNEW = "$BASE_URL/user_query_v2";
+  static const String createQueryNew = "$BASE_URL/create_query_v2";
+  static const String sendMessageNew = "$BASE_URL/query_message_v2";
+  static const String changePassword = "$BASE_URL/change_password";
+  static const String logOUt = "$BASE_URL/logout";
+  static const String getUserInfo = "$BASE_URL/user_info_v2";
+  static const String userInfoEditV2 = "$BASE_URL/user_info_edit_v2";
 }

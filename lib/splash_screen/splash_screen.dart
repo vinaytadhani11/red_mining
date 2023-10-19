@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redbtc_mining_app/utils/app_shared_preference.dart';
 import 'package:redbtc_mining_app/view/Auth/login_screen.dart';
 import 'package:redbtc_mining_app/view/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +18,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool? userExists;
 
-  checkUserInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    userExists = prefs.containsKey("token");
+  checkUserInfo() {
+    userExists = AppSharedPreference.getLogin;
   }
 
   @override
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     checkUserInfo();
     Timer(const Duration(seconds: 2), () {
       try {
-        FirebaseAuth.instance.currentUser != null ? Get.offAll(() => const HomePage()) : Get.offAll(() => const Login_Screen());
+        userExists == true ? Get.offAll(() => const HomePage()) : Get.offAll(() => const Login_Screen());
       } catch (e) {
         log(e.toString());
       }

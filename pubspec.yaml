@@ -51,6 +51,8 @@ dependencies:
   custom_date_range_picker: ^1.0.10
   image_picker: ^1.0.4
   full_screen_image: ^2.0.0
+  custom_clippers: ^2.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

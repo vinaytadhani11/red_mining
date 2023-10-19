@@ -75,11 +75,31 @@ class AppSharedPreference {
   static String get getUserName {
     return _prefsInstance!.getString(SP.userName) ?? "";
   }
+
+  static Future<bool?> setEmail(String value) async {
+    var prefs = await _instance;
+    return await prefs?.setString(SP.email, value);
+  }
+
+  static String get getEmail {
+    return _prefsInstance!.getString(SP.email) ?? "0";
+  }
+
+  static Future<bool?> setLogin(bool value) async {
+    var prefs = await _instance;
+    return await prefs?.setBool(SP.isLogin, value);
+  }
+
+  static bool get getLogin {
+    return _prefsInstance!.getBool(SP.isLogin) ?? false;
+  }
 }
 
 class SP {
   static const String UID = "UID";
   static const String userName = "userName";
+  static const String email = "email";
+  static const String isLogin = "isLogin";
   static const String token = "token";
   static const String fcmToken = "fcm_token";
   static const String userKey = "user_key";

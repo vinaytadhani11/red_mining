@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:redbtc_mining_app/models/forgot_password_model.dart';
 import 'package:redbtc_mining_app/utils/ApiNetwork/api.dart';
 import 'package:redbtc_mining_app/utils/ApiNetwork/api_constants.dart';
 import 'package:redbtc_mining_app/utils/app_function.dart';
@@ -25,6 +26,7 @@ class AuthController extends GetxController {
   TextEditingController textEditConEmail = TextEditingController();
   TextEditingController textEditConPassword = TextEditingController();
   bool isPressed = true;
+  final forgotPass = Rx<ForgotPasswordmodel?>(null);
 
   Future<UserCredential> signInWithGoogleFirebase() async {
     // Trigger the authentication flow
@@ -103,6 +105,8 @@ class AuthController extends GetxController {
           log(response.statusCode.toString());
           AppSharedPreference.setUid(jsonBody["data"]["UID"]);
           AppSharedPreference.setUserKey(jsonBody["data"]["user_key"]);
+          AppSharedPreference.setEmail(jsonBody["data"]["email"]);
+          AppSharedPreference.setLogin(true);
           Get.offAll(() => HomePage(), transition: Transition.topLevel);
           emailTC.clear();
           passTC.clear();
@@ -114,6 +118,37 @@ class AuthController extends GetxController {
       } else {
         AppFunction.showSnackBar(title: "Error", message: response.reasonPhrase);
 
+        log(response.statusCode.toString());
+      }
+    } catch (error) {
+      isLoading.value = false;
+      AppFunction.showSnackBar(title: "Error", message: error.toString());
+      print(error);
+    }
+  }
+
+  forgotPassword() async {
+    try {
+      isLoading.value = true;
+      final response = await api.post(ApiConstants.forgotPassword, bodyData: {
+        "app_id": ApiConstants.APP_ID.toString(),
+        "email": textEditConEmail.text,
+      });
+      isLoading.value = false;
+      log(response.body);
+      if (response.statusCode == 200) {
+        forgotPass.value = ForgotPasswordmodel.fromJson(jsonDecode(response.body));
+        log(response.body);
+        if (forgotPass.value?.status == true) {
+          log(response.statusCode.toString());
+          textEditConEmail.clear();
+          AppFunction.showSnackBar(title: "success", message: forgotPass.value?.message ?? "");
+        } else {
+          log(forgotPass.value?.message ?? "");
+          AppFunction.showSnackBar(title: "Error", message: forgotPass.value?.message ?? "");
+        }
+      } else {
+        AppFunction.showSnackBar(title: "Error", message: response.reasonPhrase);
         log(response.statusCode.toString());
       }
     } catch (error) {
