@@ -14,7 +14,6 @@ import 'package:redbtc_mining_app/extensions/size_extensions.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:redbtc_mining_app/inset_shodow/box_decoration.dart';
 import 'package:redbtc_mining_app/inset_shodow/box_shadow.dart';
-import 'package:redbtc_mining_app/utils/app_function.dart';
 import 'package:redbtc_mining_app/view/setting/custmore_support/dot_file.dart';
 import 'package:redbtc_mining_app/view/setting/custmore_support/ticket_message.dart';
 
@@ -65,7 +64,7 @@ class _CreateTicketState extends State<CreateTicket> {
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0XFF151414),
+                            color: const Color(0XFF151414),
                             border: Border.all(
                               color: const Color(0xffC1120E),
                             ),
@@ -370,16 +369,17 @@ class _CreateTicketState extends State<CreateTicket> {
                         Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                   text: 'Ticket id \n', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold, height: 2)),
-                              TextSpan(text: data.id.toString(), style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: data.id.toString(), style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
                         Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                   text: 'Status \n', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold, height: 2)),
                               TextSpan(
                                   text: data.status == "0"
@@ -387,17 +387,18 @@ class _CreateTicketState extends State<CreateTicket> {
                                       : data.status == "1"
                                           ? "Resolve"
                                           : "Close",
-                                  style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
+                                  style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
                         Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                   text: 'Category \n', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold, height: 2)),
                               TextSpan(
-                                  text: data.categoryName ?? "", style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
+                                  text: data.categoryName ?? "",
+                                  style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
@@ -418,16 +419,16 @@ class _CreateTicketState extends State<CreateTicket> {
                               topRight: Radius.circular(100),
                             ),
                           )),
-                      Expanded(
-                        child: const MySeparator(
-                          color: const Color(0xffC1120E),
+                      const Expanded(
+                        child: MySeparator(
+                          color: Color(0xffC1120E),
                         ),
                       ),
                       Container(
                           height: 15,
                           width: 10,
                           decoration: const BoxDecoration(
-                            color: const Color(0xffC1120E),
+                            color: Color(0xffC1120E),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(100),
                               topLeft: Radius.circular(100),

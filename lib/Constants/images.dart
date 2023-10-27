@@ -32,6 +32,7 @@ class Images {
   static const withdraw = "${iconspath}images/withdraw.webp";
   static const right_arrow = "${iconspath}images/right_arrow.webp";
   static const union = "${iconspath}images/Union.png";
+  static const purchased = "${iconspath}images/purchased.png";
 }
 
 // Global -----------------------

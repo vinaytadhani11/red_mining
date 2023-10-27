@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
+import 'package:redbtc_mining_app/Widget/purchased_popup.dart';
 import 'package:redbtc_mining_app/controllers/upgradeplanController.dart';
 import 'package:redbtc_mining_app/extensions/size_extensions.dart';
 
@@ -70,11 +71,12 @@ class _Plan_View_ScreenState extends State<Plan_View_Screen> {
                       alignment: Alignment.center,
                       children: [
                         Positioned(
-                          top: -30,
+                          top: -35,
                           right: 60,
                           left: 60,
                           child: Container(
-                            alignment: Alignment.topCenter,
+                            height: 45,
+                            alignment: Alignment.center,
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
@@ -82,7 +84,9 @@ class _Plan_View_ScreenState extends State<Plan_View_Screen> {
                             ),
                             child: Text(
                               con.selectData.value?.planName ?? "",
-                              style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
