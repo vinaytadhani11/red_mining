@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "66624004703",
+    "project_id": "redapp-8ebad",
+    "storage_bucket": "redapp-8ebad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66624004703:android:fc395b3f3643d3856771ea",
+        "android_client_info": {
+          "package_name": "com.calling.kundali"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66624004703-d6r18ff4t7kk0ue7jdho2kp3p40dsrqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj9xrQ4T4ACmZuZH85-TZx54VjklFEoIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66624004703-d6r18ff4t7kk0ue7jdho2kp3p40dsrqq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "66624004703-afscvg51vn5t2jhot12cnpll2fc2o2lg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.redbtcMiningApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
