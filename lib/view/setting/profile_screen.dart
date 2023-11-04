@@ -278,115 +278,189 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                         fontSize: 20,
                       )),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    // controller: emailController,
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    controller: con.currentPassTC,
-                    cursorColor: Color(0xffC1120E),
-                    style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                    decoration: InputDecoration(
-                      hintText: "Current Password",
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          Images.passPrivacy,
-                          fit: BoxFit.contain,
-                          height: 20,
-                          width: 18,
+                  Obx(() => 
+                     TextFormField(
+                      // controller: emailController,
+                      obscureText: con.isObscure1.value, //show/hide password
+                      onChanged: (value) {
+                        print(value);
+                      },
+                      controller: con.currentPassTC,
+                      cursorColor: Color(0xffC1120E),
+                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                      decoration: InputDecoration(
+                        hintText: "Current Password",
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(11),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  con.isObscure1.value = !con.isObscure1.value;
+                                });
+                              },
+                              child: con.isObscure1.value
+                                  ? Image.asset(
+                                      'assets/images/show_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/close_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )),
                         ),
-                      ),
-                      hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                      enabledBorder: UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            Images.passPrivacy,
+                            fit: BoxFit.contain,
+                            height: 20,
+                            width: 18,
+                          ),
+                        ),
+                        hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                        enabledBorder: UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    // controller: emailController,
-                    controller: con.newPassTC,
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password is required';
-                      } else if (!Validator.isPasswordValid(value)) {
-                        return 'Confirm Password is not matches with condition\n- 8 characters long\n- one uppercase letter\n- one lowercase letter\n- one digit\n- not containing special characters';
-                      } else {
-                        return null;
-                      }
-                    },
-                    cursorColor: const Color(0xffC1120E),
-                    style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                    decoration: InputDecoration(
-                      hintText: "New Password",
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          Images.passPrivacy,
-                          fit: BoxFit.contain,
-                          height: 20,
-                          width: 18,
+                  Obx(
+                    () =>  TextFormField(
+                      // controller: emailController,
+                      controller: con.newPassTC,
+                      onChanged: (value) {
+                        print(value);
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        } else if (!Validator.isPasswordValid(value)) {
+                          return 'Confirm Password is not matches with condition\n- 8 characters long\n- one uppercase letter\n- one lowercase letter\n- one digit\n- not containing special characters';
+                        } else {
+                          return null;
+                        }
+                      },
+                      cursorColor: const Color(0xffC1120E),
+                      style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                      obscureText: con.isObscure2.value,
+                      decoration: InputDecoration(
+                        hintText: "New Password",
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(11),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  con.isObscure2.value = !con.isObscure2.value;
+                                });
+                              },
+                              child: con.isObscure2.value
+                                  ? Image.asset(
+                                      'assets/images/show_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/close_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )),
+                          ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            Images.passPrivacy,
+                            fit: BoxFit.contain,
+                            height: 20,
+                            width: 18,
+                          ),
                         ),
-                      ),
-                      hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                      enabledBorder: const UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                        enabledBorder: const UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
+                        focusedBorder: const UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    controller: con.confirmPassTC,
-                    // controller: emailController,
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    cursorColor: const Color(0xffC1120E),
-                    style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Confirm Password is required';
-                      } else if (!Validator.isPasswordValid(value)) {
-                        return 'Confirm Password is not matches with condition\n- 8 characters long\n- one uppercase letter\n- one lowercase letter\n- one digit\n- not containing special characters';
-                      } else if (con.newPassTC.text != value) {
-                        return 'Password and Confirm Password are not the same';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Confirm New Password",
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          Images.passPrivacy,
-                          fit: BoxFit.contain,
-                          height: 20,
-                          width: 18,
+                  Obx(() => TextFormField(
+                      controller: con.confirmPassTC,
+                      // controller: emailController,
+                      onChanged: (value) {
+                        print(value);
+                      },
+                      cursorColor: const Color(0xffC1120E),
+                      style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Confirm Password is required';
+                        } else if (!Validator.isPasswordValid(value)) {
+                          return 'Confirm Password is not matches with condition\n- 8 characters long\n- one uppercase letter\n- one lowercase letter\n- one digit\n- not containing special characters';
+                        } else if (con.newPassTC.text != value) {
+                          return 'Password and Confirm Password are not the same';
+                        } else {
+                          return null;
+                        }
+                      },
+                      obscureText: con.isObscure3.value,
+                      decoration: InputDecoration(
+                        hintText: "Confirm New Password",
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(11),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  con.isObscure3.value = !con.isObscure3.value;
+                                });
+                              },
+                              child: con.isObscure3.value
+                                  ? Image.asset(
+                                      'assets/images/show_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/close_eye.webp',
+                                      fit: BoxFit.contain,
+                                      height: 22,
+                                      width: 18,
+                                    )),
+                          ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Image.asset(
+                            Images.passPrivacy,
+                            fit: BoxFit.contain,
+                            height: 20,
+                            width: 18,
+                          ),
                         ),
-                      ),
-                      hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                      enabledBorder: const UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        //<-- SEE HERE
-                        borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                        enabledBorder: const UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
+                        focusedBorder: const UnderlineInputBorder(
+                          //<-- SEE HERE
+                          borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
+                        ),
                       ),
                     ),
                   ),
@@ -464,7 +538,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   border: Border.all(color: const Color(0xffC1120E), width: 5),
                 ),
                 child: Image.asset(
-                  "assets/images/no_internat.png",
+                  "assets/images/changepassword.webp",
                   height: 50,
                 ),
               )),

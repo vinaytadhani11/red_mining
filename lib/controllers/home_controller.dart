@@ -22,6 +22,12 @@ class HomeController extends GetxController {
   RxBool isConnecting = false.obs;
   final socketIoModel = Rx<SocketIoModel?>(null);
   Api api = Api();
+  String? pointPerhr;
+  
+  getpointPerhr() {
+    String? currentSpeed = socketIoModel.value?.currentSpeed;
+    pointPerhr = (currentSpeed??"" * 0.00000001.toInt());
+  }
 
   sokectIO() {
     socket = IO.io("http://157.230.176.42:8080", <String, dynamic>{

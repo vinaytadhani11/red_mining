@@ -82,7 +82,7 @@ class _Setting_ScreenState extends State<Setting_Screen> {
                       ),
                       Divider(color: Color(0xffC1120E), endIndent: 14, indent: 14, thickness: 1.0),
                       SettingTile(
-                        text: 'Contact Us',
+                        text: 'Customer support',
                         image: Images.contact,
                         onTap: () {
                           Get.to(CreateTicket(), transition: Transition.leftToRightWithFade);

@@ -99,7 +99,8 @@ class _WithdrawHistoryState extends State<WithdrawHistory> {
                             top: 0,
                             right: 0,
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                              width: MediaQuery.of(context).size.width/2.8,
+                              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                 color: const Color(0xffC1120E),

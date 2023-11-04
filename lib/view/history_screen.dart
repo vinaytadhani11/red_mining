@@ -51,7 +51,7 @@ class _History_ScreenState extends State<History_Screen> {
           ),
           backgroundColor: Colors.transparent,
           title: const Text(
-            'History ',
+            'Mining history ',
             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
           ),
           // actions: [

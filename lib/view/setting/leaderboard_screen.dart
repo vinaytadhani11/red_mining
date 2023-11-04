@@ -74,6 +74,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             top: 0,
                             right: 0,
                             child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width/3.8,
                               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), topRight: Radius.circular(10)),
@@ -116,11 +118,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                       style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                                     ),
                                     10.boxW(),
-                                    Text(
-                                      '${data.firstName ?? ""} ${data.lastName ?? ""}',
-                                      style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width/3.6,
+                                      child: Text(
+                                        '${data.firstName ?? ""} ${data.lastName ?? ""}',maxLines:  1,overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold,),
+                                      ),
                                     ),
-                                    10.boxW(),
+                                    8.boxW(),
                                     Text(
                                       '(${data.country ?? ""})',
                                       style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),

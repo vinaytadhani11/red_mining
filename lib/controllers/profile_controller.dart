@@ -20,6 +20,9 @@ class ProfileController extends GetxController {
   final lastNameTC = TextEditingController();
   final emailTC = TextEditingController();
   String? country;
+  final isObscure1 = true.obs;
+  final isObscure2 = true.obs;
+  final isObscure3 = true.obs;
   final userInfoModel = Rx<UserInfoModel?>(null);
   final updateUser = Rx<UpdateUserModel?>(null);
   Api api = Api();

@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:redbtc_mining_app/Widget/common_loader.dart';
 import 'package:redbtc_mining_app/controllers/auth_controller.dart';
@@ -33,13 +34,13 @@ class _Login_ScreenState extends State<Login_Screen> {
             key: logInFormKey,
             child: SafeArea(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
                       margin: const EdgeInsets.only(top: 50, bottom: 25),
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           // color: Colors.white,\
                           ),
                       child: const Text(
@@ -53,14 +54,14 @@ class _Login_ScreenState extends State<Login_Screen> {
                       // color: Color(0xffC1120E),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xffC1120E),
+                          color: const Color(0xffC1120E),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 18),
+                              margin: const EdgeInsets.symmetric(vertical: 18),
                               alignment: Alignment.center,
                               decoration: const BoxDecoration(
                                 color: Color(0xffC1120E),
@@ -84,7 +85,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                               child: Column(
                                 children: [
                                   // Spacer(),
-                                  Text(
+                                  const Text(
                                     'Log In',
                                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
                                   ),
@@ -100,8 +101,8 @@ class _Login_ScreenState extends State<Login_Screen> {
                                       }
                                       return null;
                                     },
-                                    cursorColor: Color(0xffC1120E),
-                                    style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                    cursorColor: const Color(0xffC1120E),
+                                    style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
                                     decoration: InputDecoration(
                                       hintText: "Email Id",
                                       prefixIcon: Padding(
@@ -113,12 +114,12 @@ class _Login_ScreenState extends State<Login_Screen> {
                                           width: 18,
                                         ),
                                       ),
-                                      hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                                      enabledBorder: UnderlineInputBorder(
+                                      hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                      enabledBorder: const UnderlineInputBorder(
                                         //<-- SEE HERE
                                         borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
                                       ),
-                                      focusedBorder: UnderlineInputBorder(
+                                      focusedBorder: const UnderlineInputBorder(
                                         //<-- SEE HERE
                                         borderSide: BorderSide(color: Colors.white),
                                       ),
@@ -138,12 +139,12 @@ class _Login_ScreenState extends State<Login_Screen> {
                                         }
                                         return null;
                                       },
-                                      cursorColor: Color(0xffC1120E),
-                                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                      cursorColor: const Color(0xffC1120E),
+                                      style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
                                       decoration: InputDecoration(
                                         hintText: "Password",
-                                        hintStyle: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
-                                        disabledBorder: OutlineInputBorder(
+                                        hintStyle: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+                                        disabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xffC1120E),
                                           ),
@@ -157,11 +158,11 @@ class _Login_ScreenState extends State<Login_Screen> {
                                             width: 18,
                                           ),
                                         ),
-                                        enabledBorder: UnderlineInputBorder(
+                                        enabledBorder: const UnderlineInputBorder(
                                           //<-- SEE HERE
                                           borderSide: BorderSide(color: Color(0xffC1120E), width: 1.5),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
+                                        focusedBorder: const UnderlineInputBorder(
                                           //<-- SEE HERE
                                           borderSide: BorderSide(color: Colors.white),
                                         ),
@@ -202,11 +203,11 @@ class _Login_ScreenState extends State<Login_Screen> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Get.to(() => Forget_Password(), transition: Transition.rightToLeftWithFade);
+                                          Get.to(() => const Forget_Password(), transition: Transition.rightToLeftWithFade);
                                         },
                                         child: Container(
-                                          margin: EdgeInsets.fromLTRB(18, 0, 18, 0),
-                                          child: Text(
+                                          margin: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+                                          child: const Text(
                                             'Forget Password?',
                                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                                           ),
@@ -216,16 +217,37 @@ class _Login_ScreenState extends State<Login_Screen> {
                                   ),
                                   14.boxH(),
                                   InkWell(
-                                    onTap: () {
-                                      con.loginApiCalling();
-                                    },
-                                    // onTap: con.loginApiCalling,
+                                    // onTap: () {
+                                      // // --------------------------------------------
+                                      // final materialBanner = SnackBar(
+                                      //   /// need to set following properties for best effect of awesome_snackbar_content
+                                      //   elevation: 0,  
+                                      //   backgroundColor: Colors.transparent,
+                                      //   // forceActionsBelow: true,
+                                      //   content: AwesomeSnackbarContent(
+                                      //     title: 'Oh Hey!!',
+                                      //     message:
+                                      //         'This is an example error message that will be shown ',
+                                      //     /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                      //     contentType: ContentType.success,
+                                      //     // to configure for material banner
+                                      //     inMaterialBanner: true,
+                                      //   ),
+                                      //   // actions: const [SizedBox.shrink()],
+                                      // );
+                                      // ScaffoldMessenger.of(context)
+                                      //   ..hideCurrentMaterialBanner()
+                                      //   ..showSnackBar(materialBanner);
+                                      // // --------------------------------------------
+                                      // con.loginApiCalling();
+                                    // },
+                                    onTap: con.loginApiCalling,
                                     child: Container(
                                       height: 50,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         // color: Colors.white,
-                                        color: Color(0xffC1120E),
+                                        color: const Color(0xffC1120E),
                                         borderRadius: BorderRadius.circular(100),
                                         boxShadow: [
                                           const BoxShadow(
@@ -236,7 +258,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                             inset: true,
                                           ),
                                           BoxShadow(
-                                            offset: Offset(6, 6),
+                                            offset: const Offset(6, 6),
                                             blurRadius: 4,
                                             spreadRadius: 1,
                                             color: Colors.black.withOpacity(0.3),
@@ -244,7 +266,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                           ),
                                         ],
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         'LOGIN',
                                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                                       ),
@@ -288,7 +310,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                     ),
                                   ),
                                   Container(
-                                    child: Text(
+                                    child: const Text(
                                       'Sign In With',
                                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                                     ),
@@ -301,8 +323,8 @@ class _Login_ScreenState extends State<Login_Screen> {
                                     child: Container(
                                       height: 54,
                                       width: 54,
-                                      padding: EdgeInsets.all(13),
-                                      decoration: BoxDecoration(
+                                      padding: const EdgeInsets.all(13),
+                                      decoration: const BoxDecoration(
                                         color: Color(0xffC1120E),
                                         shape: BoxShape.circle,
                                       ),
@@ -317,15 +339,15 @@ class _Login_ScreenState extends State<Login_Screen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "You don't an account?",
                                         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Get.offAll(() => Register_screen(), transition: Transition.rightToLeftWithFade);
+                                          Get.to(() => const Register_screen(), transition: Transition.rightToLeftWithFade);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           " Register",
                                           style: TextStyle(
                                             fontSize: 14,

@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     con.sokectIO();
+    con.getpointPerhr();
     super.initState();
   }
 
@@ -91,7 +92,10 @@ class _HomePageState extends State<HomePage> {
             ],
             title: Text(
               'BTC Mining',
-              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           backgroundColor: Colors.transparent,
@@ -128,26 +132,40 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 'Your Current Point',
-                                style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
+                                style: TextStyle(
+                                    color: Color(0xffC1120E), fontSize: 15),
                               ),
                               Text(
                                 con.socketIoModel.value?.mining ?? "0.0000000",
-                                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
-                          VerticalDivider(color: Colors.white, endIndent: 8, indent: 8, thickness: 1.5),
+                          VerticalDivider(
+                              color: Colors.white,
+                              endIndent: 8,
+                              indent: 8,
+                              thickness: 1.5),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'Point Per Hr',
-                                style: TextStyle(color: Color(0xffC1120E), fontSize: 15),
+                                style: TextStyle(
+                                    color: Color(0xffC1120E), fontSize: 15),
                               ),
-                              Text(
-                                con.socketIoModel.value?.currentSpeed ?? "0.0000",
-                                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+                              Text( 
+                                con.socketIoModel.value?.currentSpeed ?? "0.0000000", 
+                                // con.pointPerhr ??
+                                //     "0.0000000",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
@@ -176,9 +194,12 @@ class _HomePageState extends State<HomePage> {
                       duration: const Duration(milliseconds: 50),
                       child: InkWell(
                         splashColor: Colors.transparent,
-                        overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                        overlayColor:
+                            MaterialStatePropertyAll(Colors.transparent),
                         onTap: () {
-                          con.isConnecting.value == true ? con.startingMining() : null;
+                          con.isConnecting.value == true
+                              ? con.startingMining()
+                              : null;
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -198,7 +219,8 @@ class _HomePageState extends State<HomePage> {
                             child: Stack(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 18),
                                   child: Image.asset(
                                     Images.bitcoin,
                                     fit: BoxFit.contain,
@@ -211,7 +233,10 @@ class _HomePageState extends State<HomePage> {
                                   child: Container(
                                     alignment: Alignment.topCenter,
                                     height: 170,
-                                    padding: EdgeInsets.only(top: con.isMiningStart.value == false ? 27 : 27),
+                                    padding: EdgeInsets.only(
+                                        top: con.isMiningStart.value == false
+                                            ? 27
+                                            : 27),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 2,
@@ -225,9 +250,16 @@ class _HomePageState extends State<HomePage> {
                                           ? "Connecting"
                                           : con.isMiningStart.value == false
                                               ? "Start"
-                                              : con.socketIoModel.value?.timeString ?? "Connecting",
+                                              : con.socketIoModel.value
+                                                      ?.timeString ??
+                                                  "Connecting",
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: con.isMiningStart.value == false ? 15 : 15, fontWeight: FontWeight.w600),
+                                          color: Colors.white,
+                                          fontSize:
+                                              con.isMiningStart.value == false
+                                                  ? 15
+                                                  : 15,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 )
@@ -258,11 +290,15 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Your Current Plan',
-                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(() => UpgradePlanScreen(), transition: Transition.downToUp);
+                            Get.to(() => UpgradePlanScreen(),
+                                transition: Transition.downToUp);
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -293,7 +329,10 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'Upgrade',
-                                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 5.boxW(),
                                 Image.asset(
@@ -322,11 +361,17 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Active Mining',
-                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                         Text(
                           '57,000',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),

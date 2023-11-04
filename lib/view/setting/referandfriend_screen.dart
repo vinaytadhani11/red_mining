@@ -164,6 +164,89 @@ class _ReferFriend_ScreenState extends State<ReferFriend_Screen> {
                         ),
                       ),
                       const SizedBox(height: 20),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        // height: 90,
+                        // margin: const EdgeInsets.fromLTRB(18, 0, 18, 10),
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: const Color(0XFF151414),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: const Color(0xffC1120E), width: 1.0),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '● Apply refer code to get rewards',
+                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
+                            14.boxH(),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              // padding: EdgeInsets.symmetric(horizontal: 40),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                border: Border.all(color: const Color(0xffC1120E), width: 1.5),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: TextFormField(
+                                readOnly: true,
+                                onChanged: (value) {
+                                  print(value);
+                                },
+                                controller: con.getReferCode,
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(color: Colors.white, fontSize: 17),
+                                cursorColor: Color(0xffC1120E),
+                                decoration: const InputDecoration(
+                                    hintText: "Refer Code",
+                                    hintStyle: TextStyle(fontSize: 14, color: Colors.white, height: 2, fontWeight: FontWeight.w500),
+                                    border: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    contentPadding: EdgeInsets.fromLTRB(14, 0, 0, 0)),
+                              ),
+                            ),
+                            14.boxH(),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width,
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: const Color(0xffC1120E),
+                                  boxShadow: [
+                                    const BoxShadow(
+                                      offset: Offset(-10, -10),
+                                      blurRadius: 3,
+                                      // spreadRadius:8,
+                                      color: Color(0xffC1120E),
+                                      inset: true,
+                                    ),
+                                    BoxShadow(
+                                      offset: Offset(6, 6),
+                                      blurRadius: 4,
+                                      spreadRadius: 1,
+                                      color: Colors.black.withOpacity(0.3),
+                                      inset: true,
+                                    ),
+                                  ],
+                                ),
+                                child: const Text(
+                                  'GET REWARED',
+                                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                       const Text(
                         "Received Rewards",
                         style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),

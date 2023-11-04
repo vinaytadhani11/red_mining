@@ -13,6 +13,7 @@ class ReferController extends GetxController {
   final isLoading = false.obs;
   Api api = Api();
   final userInfoModel = Rx<UserInfoModel?>(null);
+  final getReferCode = TextEditingController();
 
   getUserInfo() async {
     try {

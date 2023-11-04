@@ -410,7 +410,7 @@ class _Register_screenState extends State<Register_screen> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Get.offAll(() => Login_Screen(), transition: Transition.rightToLeftWithFade);
+                                          Get.back();
                                         },
                                         child: Text(
                                           " Login",

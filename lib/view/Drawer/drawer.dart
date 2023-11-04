@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redbtc_mining_app/controllers/home_controller.dart';
+import 'package:redbtc_mining_app/controllers/profile_controller.dart';
 import 'package:redbtc_mining_app/extensions/size_extensions.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../Constants/images.dart';
@@ -20,6 +21,13 @@ class Drawbridge extends StatefulWidget {
 
 class _DrawbridgeState extends State<Drawbridge> {
   final con = Get.put(HomeController());
+  final con1 = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    con1.getUserInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +78,14 @@ class _DrawbridgeState extends State<Drawbridge> {
               ),
             ),
             10.boxH(),
-            Text(
-              'Dixson Richard',
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
+            Obx(
+              () => Text(
+                '${con1.userInfoModel.value?.data?.firstName}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
             8.boxH(),
@@ -83,12 +93,12 @@ class _DrawbridgeState extends State<Drawbridge> {
               Get.back();
             }),
             8.boxH(),
-            CustomListTile(Images.plan, 'Upgrade Speed', () {
+            CustomListTile(Images.plan, 'Upgrade plan', () {
               Get.back();
               Get.to(UpgradePlanScreen(), transition: Transition.leftToRightWithFade);
             }),
             8.boxH(),
-            CustomListTile(Images.withdraw, 'Withdraw Shiba ', () {
+            CustomListTile(Images.withdraw, 'Withdraw BTC', () {
               Get.back();
               Get.to(Withdraw_Screen(), transition: Transition.leftToRightWithFade);
             }),
